@@ -204,6 +204,8 @@ void apply( uint64_t receiver, uint64_t code, uint64_t action ) {
         string func_name_str = memo.substr(0, separator_pos);
         if(0 == func_name_str.compare("buykey")){
             thiscontract.buykey(tmp.from, tmp.quantity,tmp.memo);
+        }else{
+            eosio_assert(false, "the memo format is error");
         }
 
     }
