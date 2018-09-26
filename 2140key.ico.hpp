@@ -6,6 +6,7 @@
 
 #include <eosiolib/asset.hpp>
 #include <eosiolib/eosio.hpp>
+#include <eosiolib/time.hpp>
 
 #include <string>
 
@@ -55,13 +56,24 @@ namespace eosico {
          typedef eosio::multi_index<N(accounts), account> accounts;
          typedef eosio::multi_index<N(stat), currency_stats> stats;
 
-       struct allaccount {
+        struct allaccount {
            account_name  account;
            asset    balance;
 
            uint64_t primary_key()const { return account; }
-       };
+        };
          typedef eosio::multi_index<N(allaccounts), allaccount> allaccounts;
+
+         struct icoinfo{
+             uint64_t id;
+             account_name account;
+             asset quant;
+             time_point_sec time;
+
+             uint64_t primary_key()const { return id; }
+         };
+         typedef eosio::multi_index<N(icoinfos), icoinfo> icoinfos;
+
 
          void sub_balance( account_name owner, asset value );
          void add_balance( account_name owner, asset value, account_name ram_payer );

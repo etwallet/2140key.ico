@@ -147,6 +147,7 @@ namespace eosico {
     }
 
     void ico::buykey(account_name to, asset quantity, string memo){
+        require_auth(to);
         eosio_assert(quantity.symbol == S(4, EOS), "symbol must be EOS");
 
         stats statstable( _self, symbol_type(TOKEN_SYMBOL).name() );
@@ -156,6 +157,14 @@ namespace eosico {
         eosio_assert( existing->supply.amount+quantity.amount <= PHASE_ONE, "the key has been sold more than 150000.0000");
 
         SEND_INLINE_ACTION( *this, issue, {existing->issuer,N(active)}, {to, asset{quantity.amount, TOKEN_SYMBOL}, memo} );
+
+        icoinfos _icoinfo(_self, _self);
+        _icoinfo.emplace( to, [&]( auto& a ){
+            a.id = _icoinfo.available_primary_key();
+            a.account = to;
+            a.quant = quantity;
+            a.time = time_point_sec(now());
+        });
     }
 } /// namespace eosio
 

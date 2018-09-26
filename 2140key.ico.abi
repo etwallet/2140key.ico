@@ -49,7 +49,16 @@
         {"name":"max_supply", "type":"asset"},
         {"name":"issuer", "type":"account_name"}
       ]
-    }
+    },{
+       "name": "icoinfo",
+       "base": "",
+       "fields": [
+         {"name":"id", "type":"uint64"},
+         {"name":"account", "type":"account_name"},
+         {"name":"quant", "type":"asset"},
+         {"name":"time", "type":"time_point_sec"},
+       ]
+     }
   ],
   "actions": [{
       "name": "transfer",
@@ -84,7 +93,13 @@
       "index_type": "i64",
       "key_names" : ["currency"],
       "key_types" : ["uint64"]
-    }
+    },{
+       "name": "icoinfos",
+       "type": "icoinfo",
+       "index_type": "i64",
+       "key_names" : ["currency"],
+       "key_types" : ["uint64"]
+     }
   ],
   "ricardian_clauses": [],
   "abi_extensions": []

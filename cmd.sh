@@ -129,9 +129,13 @@ cleos  --wallet-url http://localhost:6666 --url http://localhost:8000 get curren
 cleos  --wallet-url http://localhost:6666 --url http://localhost:8000 push action eosio.token create '["eosio", "10000000000.0000 BTC", "memo"]' -p eosio.token
 
 cleos  --wallet-url http://localhost:6666 --url http://localhost:8000 push action eosio.token issue '["user11111111", "100000000.0000 BTC", "memo"]' -p eosio
-
+exit
 cleos  --wallet-url http://127.0.0.1:6666 --url http://localhost:8000 push action eosio.token transfer '["user11111111", "issuerkeyacc","150000.0000 BTC","buykey:"]' -p user11111111
 
+cleos  --wallet-url http://127.0.0.1:6666 --url http://localhost:8000 push action eosio.token transfer '["user11111111", "issuerkeyacc","10000.0000 EOS","buykey:"]' -p user11111111
+cleos  --wallet-url http://127.0.0.1:6666 --url http://localhost:8000 push action eosio.token transfer '["user11111111", "issuerkeyacc","20000.0000 EOS","buykey:"]' -p user11111111
+cleos  --wallet-url http://127.0.0.1:6666 --url http://localhost:8000 push action eosio.token transfer '["user11111111", "issuerkeyacc","30000.0000 EOS","buykey:"]' -p user11111111
+cleos  --wallet-url http://127.0.0.1:6666 --url http://localhost:8000 push action eosio.token transfer '["user11111111", "issuerkeyacc","90000.0000 EOS","buykey:"]' -p user11111111
 
 cleos  --wallet-url http://127.0.0.1:6666 --url http://localhost:8000 push action eosio.token transfer '["user11111111", "issuerkeyacc","150000.0000 EOS","buykey:"]' -p user11111111
 
@@ -139,7 +143,7 @@ cleos  --wallet-url http://127.0.0.1:6666 --url http://localhost:8000 push actio
 
 cleos  --wallet-url http://localhost:6666 --url http://localhost:8000 get currency stats  issuerkeyacc KEY
 
-
+cleos  --wallet-url http://localhost:6666 --url http://localhost:8000 get table  issuerkeyacc issuerkeyacc icoinfos
 
 
 
