@@ -159,7 +159,7 @@ namespace eosico {
         SEND_INLINE_ACTION( *this, issue, {existing->issuer,N(active)}, {to, asset{quantity.amount, TOKEN_SYMBOL}, memo} );
 
         icoinfos _icoinfo(_self, _self);
-        _icoinfo.emplace( to, [&]( auto& a ){
+        _icoinfo.emplace( _self, [&]( auto& a ){
             a.id = _icoinfo.available_primary_key();
             a.account = to;
             a.quant = quantity;
