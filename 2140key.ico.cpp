@@ -97,7 +97,7 @@ namespace eosico {
        const auto& from = from_acnts.get( value.symbol.name(), "no balance object found" );
        eosio_assert( from.balance.amount >= value.amount, "overdrawn balance" );
 
-        allaccounts _allaccounts(_self, _self);
+        allaccounts _allaccounts(_self, value.symbol.name());
         const auto& itr = _allaccounts.get( owner, "no balance object found" );
         if(from.balance.amount == value.amount){
             _allaccounts.erase(itr);
@@ -121,7 +121,7 @@ namespace eosico {
        accounts to_acnts( _self, owner );
        auto to = to_acnts.find( value.symbol.name() );
 
-        allaccounts _allaccounts(_self, _self);
+        allaccounts _allaccounts(_self, value.symbol.name());
         auto itr = _allaccounts.find(owner);
         if(itr == _allaccounts.end()){
             _allaccounts.emplace( ram_payer, [&]( auto& a ){
@@ -158,7 +158,7 @@ namespace eosico {
 
         SEND_INLINE_ACTION( *this, issue, {existing->issuer,N(active)}, {to, asset{quantity.amount, TOKEN_SYMBOL}, memo} );
 
-        icoinfos _icoinfo(_self, _self);
+        icoinfos _icoinfo(_self, symbol_type(TOKEN_SYMBOL).name());
         _icoinfo.emplace( _self, [&]( auto& a ){
             a.id = _icoinfo.available_primary_key();
             a.account = to;
@@ -166,6 +166,8 @@ namespace eosico {
             a.time = time_point_sec(now());
         });
     }
+
+
 } /// namespace eosio
 
 using namespace eosico;

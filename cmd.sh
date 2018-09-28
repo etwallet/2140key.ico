@@ -71,6 +71,8 @@ cleos  --wallet-url http://localhost:6666   --url http://localhost:8000 system n
 #cleos  --wallet-url http://127.0.0.1:4444  --url http://localhost:8000 set account permission etbissue1111 active '{"threshold": 1,"keys": [],"accounts": [{"permission":{"actor":"etbico111111","permission":"eosio.code"},"weight":1}]}' owner -p etbissue1111
 
 #创建用户账户
+#Private key: 5KDsFepEAS7hEpnkRVFk7NQiX7gxCTVvUVTTVvi84XSkuNKRaVh
+#Public key: EOS7nnGJ7Ra911dwR1rQFw2MD2M8RkRPzUBtYb3qBmuYfaxbkUWmd
 cleos --wallet-url http://localhost:6666 --url http://localhost:8000  system newaccount --transfer eosio user11111111 EOS7nnGJ7Ra911dwR1rQFw2MD2M8RkRPzUBtYb3qBmuYfaxbkUWmd --stake-net "1000.0000 EOS" --stake-cpu "1000.0000 EOS" --buy-ram "100.0000 EOS"
 
 #Private key: 5Jo6Ceomf55SomY3ywwUHVBXK5GzLZF3UCbAgXKP4fvVotLYP1E
@@ -163,22 +165,28 @@ cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 set contra
 
 cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 push action etbexchanger create '["etbexchanger","etbexchange5", "50000.0000 EOS","issuerkeyacc","850000.0000 KEY"]' -p etbexchanger
 
-cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 push action etbexchanger setparam '["issuerkeyacc","4,KEY","exchange_type","1"]' -p etbexchanger 
+cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 push action etbexchanger setparam '["issuerkeyacc","4,KEY","exchange_type","0"]' -p etbexchanger 
 
-cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 push action etbexchanger setparam '["issuerkeyacc","4,KEY","base_weight","20/1"]' -p etbexchanger
+#cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 push action etbexchanger setparam '["issuerkeyacc","4,KEY","base_weight","20/1"]' -p etbexchanger
 
-cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 push action etbexchanger setparam '["issuerkeyacc","4,KEY","quote_weight","1/20"]' -p etbexchanger
+#cleos  --wallet-url http://127.0.0.1:4444 --url http://localhost:8000 push action etbexchanger setparam '["issuerkeyacc","4,KEY","quote_weight","1/20"]' -p etbexchanger
 
 cleos --wallet-url http://127.0.0.1:4444 --url http://localhost:8000  get table etbexchanger etbexchanger markets
 exit
 
-cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger buytoken '["user22222222", "1.0000 EOS","issuerkeyacc", "4,KEY", "feeaccount", "0"]' -p user22222222
+cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger buytoken '["user22222222", "10000.0000 EOS","issuerkeyacc", "4,KEY", "feeaccount", "0"]' -p user22222222
 
 cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger selltoken '["user22222222", "issuerkeyacc", "0.8499 KEY", "feeaccount", "0"]' -p user22222222
 
 cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger selltoken '["user11111111","issuerkeyacc", "150000.0000 KEY", "feeaccount", "0"]' -p user11111111
 
-cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger buytoken '["user11111111", "50001.0000 EOS","issuerkeyacc", "4,KEY", "feeaccount", "0"]' -p user11111111
+cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger buytoken '["user11111111", "50000.0000 EOS","issuerkeyacc", "4,KEY", "feeaccount", "0"]' -p user11111111
+
+cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger addtoken '["user11111111", "10000.0000 EOS","issuerkeyacc", "4,KEY"]' -p user11111111
+cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger addtoken '["user22222222", "10000.0000 EOS","issuerkeyacc", "4,KEY"]' -p user22222222
+
+cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger subtoken '["user11111111", "10000.0000 EOS","issuerkeyacc", "4,KEY"]' -p user11111111
+cleos --wallet-url http://localhost:6666 --url http://localhost:8000  push action etbexchanger subtoken '["user22222222", "10000.0000 EOS","issuerkeyacc", "4,KEY"]' -p user22222222
 
 cleos --wallet-url http://127.0.0.1:4444 --url http://localhost:8000  get table etbexchanger etbexchanger markets
 
